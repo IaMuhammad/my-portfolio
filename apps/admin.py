@@ -2,7 +2,7 @@ from django.contrib.admin import ModelAdmin, register
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 
-from apps.models import User, Portfolio, Message, Category, Skill, Education, Social
+from apps.models import User, Portfolio, Message, Category, Skill, Education, Social, FeedBack
 
 
 # Register your models here.
@@ -18,8 +18,6 @@ class UserAdmin(ModelAdmin):
         return 'null'
 
 
-
-
 @register(Category)
 class CategoryAdmin(ModelAdmin):
     list_display = ('name', 'slug')
@@ -33,6 +31,7 @@ class PortfolioAdmin(ModelAdmin):
                     'project_date', 'project_url_site')
     list_filter = ('client', 'project_date',)
     readonly_fields = ('headshot_image',)
+    exclude = ('slug',)
 
     def main_picture(self, obj):
         return format_html(
@@ -48,13 +47,16 @@ class PortfolioAdmin(ModelAdmin):
             height=obj.picture.height,
         ))
 
+
 @register(Education)
 class EducationAdmin(ModelAdmin):
     list_display = ("title", "timedelta")
 
+
 @register(Skill)
 class SkillAdmin(ModelAdmin):
     list_display = ('name', 'user')
+
 
 @register(Social)
 class SocialAdmin(ModelAdmin):
@@ -64,3 +66,10 @@ class SocialAdmin(ModelAdmin):
 @register(Message)
 class MessageAdmin(ModelAdmin):
     list_display = ('name', 'email', 'subject', 'message', 'written_at', 'answered',)
+
+
+@register(FeedBack)
+class MessageAdmin(ModelAdmin):
+    list_display = ('author', 'written_at', 'feedback_100')
+    def feedback_100(self, obj):
+        return obj.feedback[:100]

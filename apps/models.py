@@ -73,6 +73,11 @@ class Category(Model):
     name = CharField(max_length=255)
     slug = CharField(max_length=255)
 
+
+    @property
+    def portfolio_count(self):
+        return self.portfolio_set.count()
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
@@ -124,11 +129,14 @@ class Portfolio(Model):
         super().save(*args, **kwargs)
 
 
-# class FeedBackView(Model):
-#     author = ForeignKey('apps.User', CASCADE)
-#     for_who = ForeignKey('apps.User', CASCADE)
-#     feedback = TextField()
-#     written_at = DateTimeField(auto_now_add=True)
+class FeedBack(Model):
+    author = ForeignKey('apps.User', CASCADE)
+    feedback = TextField()
+    written_at = DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Feedback'
+        verbose_name_plural = 'Feedbacks'
 
 class Message(Model):
     name = CharField(max_length=255)
