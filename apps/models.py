@@ -15,7 +15,7 @@ class User(AbstractUser):
         MIDDLE = 'middle', 'middle',
         SENIOR = 'senior', 'senior'
 
-    birthday = DateField(auto_now_add=True)
+    birthday = DateField(default=datetime(2003, 9, 1))
     phone = CharField(max_length=30)
     degree = CharField(max_length=20, choices=Degree.choices, default=Degree.JUNIOR)
     majority = CharField(max_length=255)
