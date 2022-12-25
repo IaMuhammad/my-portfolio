@@ -109,6 +109,9 @@ class Portfolio(Model):
     project_date = DateField(auto_now_add=True)
     project_url = CharField(max_length=255)
     picture = ImageField()
+    link = URLField()
+
+
 
     def save(self, *args, **kwargs):
         if not self.slug:

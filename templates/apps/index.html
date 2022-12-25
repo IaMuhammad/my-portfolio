@@ -534,9 +534,9 @@
 
         <div class="row portfolio-container">
             {% for portfolio in portfolios %}
-                <div class="col-lg-4 col-md-6 portfolio-item filter-{{ portfolio.category.slug }}">
+                <div class="col-lg-6 col-md-6 portfolio-item filter-{{ portfolio.category.slug }}">
                     <div class="portfolio-wrap">
-                        <img src="{{ portfolio.picture.url }}" class="img-fluid" alt="">
+                        <img style="border-radius: 5px;" width="540px" height="400px" src="{{ portfolio.picture.url }}" class="" alt=""  >
                         <div class="portfolio-info">
                             <h4>{{ portfolio.title }}</h4>
                             <p>{{ portfolio.category.name }}</p>
@@ -545,6 +545,7 @@
                                    data-gallery="portfolioGallery" class="portfolio-lightbox"
                                    title="{{ portfolio.title }}"><i
                                         class="bx bx-plus"></i></a>
+
                                 <a href="{% url 'portfolio_detail_view' portfolio.slug %}"
                                    data-gallery="portfolioDetailsGallery"
                                         {#                                   data-glightbox="type: external" class="portfolio-details-lightbox"#}
