@@ -19,6 +19,9 @@ from django.urls import path, include
 
 from root.settings import STATIC_URL, STATIC_ROOT, MEDIA_URL, MEDIA_ROOT
 
+def divide_zero():
+    return 1/0
+
 urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('', include('apps.urls')),
